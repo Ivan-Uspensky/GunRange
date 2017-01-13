@@ -35,7 +35,7 @@ public class Gun : MonoBehaviour {
 			smoke.DrawSmoke();
 		}
 		if (heatTimer > 0) {
-			heatTimer -= Time.deltaTime / 10;
+			heatTimer -= Time.deltaTime / 3;
 			Heat();
 		}
 	}

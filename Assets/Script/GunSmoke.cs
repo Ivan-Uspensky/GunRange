@@ -8,7 +8,7 @@ public class GunSmoke : MonoBehaviour {
 	public float riseSpeed = 0.5f;
 	public float spread  = 0.25f;
 
-	bool drawState = false;
+	public bool drawState = false;
 
 	LineRenderer line;
 	Transform tr;
@@ -94,6 +94,7 @@ public class GunSmoke : MonoBehaviour {
 	}
 
 	public void StopSmoke() {
+		
 		drawState = false;
 		currentNumberOfPoints = 2;
 		allPointsAdded = false;
