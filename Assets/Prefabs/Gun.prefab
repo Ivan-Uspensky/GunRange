@@ -649,6 +649,6 @@ MonoBehaviour:
   projectile: {fileID: 114000014045580906, guid: bc3c60b3db1023b4fa96d2e48c89cf29,
     type: 2}
   gunSmoke: {fileID: 114000010775186008, guid: 85963edc3518b514c99619a86a56a894, type: 2}
-  msBetweenShots: 100
+  msBetweenShots: 200
   muzzleVelocity: 53
   gunSmokeDeathTime: 2.5
