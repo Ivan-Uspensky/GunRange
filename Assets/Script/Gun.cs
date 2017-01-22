@@ -38,22 +38,22 @@ public class Gun : MonoBehaviour {
 			smoke.DrawSmoke();
 		}
 		if (heatTimer > 0) {
-			heatTimer -= Time.deltaTime / 3;
+			heatTimer -= Time.deltaTime / 5;
 			Heat();
 		}
 
-		if (muzzleFlag == true) {
-			animator.Play("Fire");
-			StartCoroutine(MuzzleStop());
-			animator.Play("Idle");
-			muzzleFlag = false;
-		}
+		// if (muzzleFlag == true) {
+		// 	animator.Play("Fire");
+		// 	StartCoroutine(MuzzleStop());
+		// 	animator.Play("Idle");
+		// 	muzzleFlag = false;
+		// }
 	}
 
 	void Heat() {
-		print("heatTimer: " + heatTimer);
+		// print("heatTimer: " + heatTimer);
 		finalColor = baseColor * heatTimer;
-		print("finalColor: " + finalColor);
+		// print("finalColor: " + finalColor);
 		material.SetColor("_EmissionColor", finalColor);
 	}
 
