@@ -55,7 +55,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
-  Spark: {fileID: 4000011583969730, guid: dc1e78630c3fb344eb90f7fc36c1a078, type: 2}
+  Spark: {fileID: 4000012686021588, guid: c192d6a2693598d478c33f3c2e822818, type: 2}
   Dust: {fileID: 4000011474479976, guid: 06ae3d5eaa3136240ac2516db6c408da, type: 2}
   Splinter: {fileID: 4000012308165870, guid: c54c9f573578cee4fa925b14d3c83738, type: 2}
   SpreadRange: 0.1
