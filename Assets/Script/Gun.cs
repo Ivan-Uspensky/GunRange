@@ -13,6 +13,8 @@ public class Gun : MonoBehaviour {
 	Material material;
 	Color baseColor = Color.white;
 	Color finalColor;
+	Animator animator;
+	bool muzzleFlag = false;
 
 	float heatTimer = 0;
 	float smokeDeathTimer = 2.6f;
@@ -25,6 +27,7 @@ public class Gun : MonoBehaviour {
 		smoke.GetComponent<Transform>().parent = muzzle;
 		renderer = this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
         material = renderer.material;
+        animator = this.gameObject.transform.GetChild(1).GetChild(0).GetComponent<Animator>();
 	}
 
 	void Update() {
@@ -37,6 +40,13 @@ public class Gun : MonoBehaviour {
 		if (heatTimer > 0) {
 			heatTimer -= Time.deltaTime / 3;
 			Heat();
+		}
+
+		if (muzzleFlag == true) {
+			animator.Play("Fire");
+			StartCoroutine(MuzzleStop());
+			animator.Play("Idle");
+			muzzleFlag = false;
 		}
 	}
 
@@ -53,11 +63,16 @@ public class Gun : MonoBehaviour {
 			Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
 			newProjectile.SetSpeed (muzzleVelocity);
 			smokeDeathTimer = 0;
+			muzzleFlag = true;
 			
 			if (heatTimer < 3) {
 				heatTimer += 0.1f;
 				Heat();	
 			}
 		}
+	}
+
+	IEnumerator MuzzleStop() {
+		yield return new WaitForSeconds (.2f);
 	}
 }
