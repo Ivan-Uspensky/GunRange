@@ -34,8 +34,6 @@ public class Gun : MonoBehaviour {
 		smokeDeathTimer += Time.deltaTime;
 		if (smokeDeathTimer > gunSmokeDeathTime) {
 			smoke.StopSmoke();
-		} else {
-			smoke.DrawSmoke();
 		}
 		if (heatTimer > 0) {
 			heatTimer -= Time.deltaTime / 5;
@@ -51,20 +49,20 @@ public class Gun : MonoBehaviour {
 	}
 
 	void Heat() {
-		// print("heatTimer: " + heatTimer);
 		finalColor = baseColor * heatTimer;
-		// print("finalColor: " + finalColor);
 		material.SetColor("_EmissionColor", finalColor);
 	}
 
 	public void Shoot() {
 		if (Time.time > nextShotTime) {
-			nextShotTime = Time.time +msBetweenShots / 1000;
+			nextShotTime = Time.time + msBetweenShots / 1000;
 			Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
 			newProjectile.SetSpeed (muzzleVelocity);
 			smokeDeathTimer = 0;
 			muzzleFlag = true;
 			
+			smoke.DrawSmoke();
+
 			if (heatTimer < 3) {
 				heatTimer += 0.1f;
 				Heat();	

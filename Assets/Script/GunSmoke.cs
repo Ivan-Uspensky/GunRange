@@ -8,7 +8,8 @@ public class GunSmoke : MonoBehaviour {
 	public float riseSpeed = 0.5f;
 	public float spread  = 0.25f;
 
-	public bool drawState = false;
+	bool drawState = false;
+	bool prevDrawState = false;
 
 	LineRenderer line;
 	Transform tr;
@@ -21,6 +22,7 @@ public class GunSmoke : MonoBehaviour {
 	int currentNumberOfPoints = 2;
 	bool allPointsAdded = false;
 	Vector3 tempVec;
+	float transparency = 1f;
 
 
 	void Start () {
@@ -42,12 +44,25 @@ public class GunSmoke : MonoBehaviour {
 	}
 
 	void Update () {
+		if (drawState != prevDrawState) {
+			prevDrawState = drawState;
+		}
+		
 		if (drawState) {
-			timeSinceUpdate += Time.deltaTime; 
+			timeSinceUpdate += Time.deltaTime;
 
+			// if ( drawState && prevDrawState) {
+
+			// }
+			
 			if ( timeSinceUpdate > updateSpeed ) {
 				timeSinceUpdate -= updateSpeed;
-
+				if (transparency >= 0) {
+					transparency -= 0.05f;
+				} else {
+					transparency = 0;
+				}
+				
 				if ( !allPointsAdded ) {
 					currentNumberOfPoints++;
 					line.SetVertexCount ( currentNumberOfPoints );
@@ -85,16 +100,23 @@ public class GunSmoke : MonoBehaviour {
 				vec2.x = (float)(lineSegment * ( timeSinceUpdate / updateSpeed ));
 				lineMaterial.mainTextureOffset = vec2;
 				//lineMaterial.mainTextureOffset.x = lineSegment * ( timeSinceUpdate / updateSpeed );
+				// transparency -= 0.1f;
+				// Debug.Log(transparency);
+				// lineMaterial.SetColor("_TintColor", new Color(1, 1, 1, transparency));
 			}
+			
+			Debug.Log(transparency);
+			lineMaterial.SetColor("_TintColor", new Color(1, 1, 1, transparency));
 		}
 	}
 	
 	public void DrawSmoke() {
 		drawState = true;
+		transparency = 1f;
 	}
 
 	public void StopSmoke() {
-		
+		transparency = 1f;
 		drawState = false;
 		currentNumberOfPoints = 2;
 		allPointsAdded = false;
